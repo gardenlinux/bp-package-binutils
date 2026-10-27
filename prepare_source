@@ -1,0 +1,16 @@
+apt-get install -y --no-install-recommends curl ca-certificates
+
+set -o pipefail
+
+curl -sSLf https://dqf78g7gefsor.cloudfront.net/debian-snapshot/pool/b86c7b16ab7d5c7a9687ab6cfafd153c8c6ca801e1082bdc2a9238683ea75cae/binutils_2.47.orig.tar.xz \
+| unxz \
+| tee "$dir/orig.tar" \
+| tar --extract --strip-components 1 --directory "$dir/src"
+
+mkdir "$dir/src/debian"
+
+curl -sSLf https://dqf78g7gefsor.cloudfront.net/debian-snapshot/pool/b86c7b16ab7d5c7a9687ab6cfafd153c8c6ca801e1082bdc2a9238683ea75cae/binutils_2.47-6.debian.tar.xz \
+| unxz \
+| tar --extract --strip-components 1 --directory "$dir/src/debian"
+
+version_suffix=gl0~bp1877
